@@ -1,24 +1,22 @@
 let g:foolish_move#config = get(g:, 'foolish_move#config', {})
 let g:foolish_move#config.fps = get(g:foolish_move#config, 'fps', 1000.0 / 16)
-let g:foolish_move#config.drag = get(g:foolish_move#config, 'drag', 1)
-let g:foolish_move#config.speed = get(g:foolish_move#config, 'speed', 2)
+let g:foolish_move#config.speed = get(g:foolish_move#config, 'speed', 3)
 
 let s:state = {
 			\   'timer_id': -1,
-			\   'tick_count': 0,
 			\   'v_x': 0,
 			\   'v_y': 0
       \ }
 
 function! foolish_move#flick(direction)
 	if a:direction ==# 'up'
-		let s:state.v_y -= g:foolish_move#config.speed
+		let s:state.v_y = -g:foolish_move#config.speed
 	elseif a:direction ==# 'down'
-		let s:state.v_y += g:foolish_move#config.speed
+		let s:state.v_y = g:foolish_move#config.speed
 	elseif a:direction ==# 'left'
-		let s:state.v_x -= g:foolish_move#config.speed
+		let s:state.v_x = -g:foolish_move#config.speed
 	elseif a:direction ==# 'right'
-		let s:state.v_x += g:foolish_move#config.speed
+		let s:state.v_x = g:foolish_move#config.speed
 	endif
 	call s:start_timer()
 endfunction
